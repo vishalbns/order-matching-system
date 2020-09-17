@@ -1,0 +1,88 @@
+<!-- Navbar Header display on the top -->
+<nav class="navbar navbar-inverse" style="height: 75px;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img src="assets/images/QuintetLogo.png" height="50px">
+        </a>
+      </div>
+      <div style="margin-top: 25px;">
+        <p style="text-align: center; font-size: 20px; color: whitesmoke; font-family: copperplate"><b>Order Matching System</b></p>
+      </div>
+      <div style="text-align: right; margin-top: -50px;">
+        <img src="assets/images/microsoft-logo.png" style="width: 120px; height: 50px;">
+      </div>
+    </div>
+  </nav>
+  <!--main page-->
+  <table style="width: 100%; height: 100%; margin-top: -20px;">
+    <tr style="background-color: #333; height: 40px; width: 100%;">
+      <td style="width: 100%;"><p style="font-family: copperplate; color:whitesmoke; font-size: 25px; ">&nbsp; Microsoft Corporation Common Stock (MSFT) 
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="color: lightblue; font-size: 15px; font-family: sans-serif;">Last Close Price: $205</span></p>
+       </td>
+    </tr>
+    <tr style="width: 100%; ;height: 250px; background-color:rgb(68, 82, 97) ;"><br>
+      <div>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;"> Open Price: </p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">Total Volume: </p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">52 Week High/Low: </p>
+      <p style="color: red; text-align: center; font-family: 'Times New Roman', Times, serif;">Circuit Band: 190&lt;Limitorderprice&lt;210</p>
+      <form #openmarketform action="/clearGsheet" method="POST" style="text-align: center;">
+        <button class="btn form-control" style="width: 200px; height: 30px; background-color: yellowgreen;" (click)="openmarketform.submit()">Open Market</button>
+      </form></div>
+    </tr>
+    <tr style="width: 100%; background-color:rgb(68, 82, 97)">
+      <td width=100%>
+        <iframe style="width: 100%; height: 300px; margin-top: -65px;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8ZNfop0bEv5PMMm_RaK8eAHX_LUxU2zPu8v32Fztlj9AxV0fZVrn7HGncrSmTTDx2JfJRVFGfi8t5/pubhtml?widget=true&amp;headers=false"></iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 100%;">
+        <p style="text-align: center;"><b><i>To view/ download the google sheet, <a href="https://docs.google.com/spreadsheets/d/1WYScLRCDOXL1zZK6nma6InmkDDvjrOAN4I8gVo2I7uM/edit?usp=sharing">click here.</a></i></b></p>
+      </td>
+    </tr>
+    <tr style="height: 100px; background-color: #333;">
+      <td style="width: 100%;"><br>
+    <form #numform action="/numUserOrders" method="POST">
+      <div class="form-group">
+        &nbsp;&nbsp;&nbsp;<label style="color: whitesmoke"><i>Select number of orders you'd like to place: &nbsp;&nbsp;&nbsp;</i></label>
+        <select id="number_of_user_orders" name="number_of_user_orders" style="width: 50px;">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select> &nbsp;&nbsp;&nbsp;
+        <button class="btn form-control" type="submit" (click)="numform.submit()" style="background-color: lightgreen;  width: 120px; height: 25px;">Send</button>
+      </div>
+    </form>
+        <p style="color: red; font-family: 'Times New Roman', Times, serif;"><b><i>*Maximum 5 trades are allowed in a day (for 1 iteration)</i></b></p>
+  <!--<form #form action="/" method="POST">-->
+    <form #form action="/" method="POST" id="newOrderForm">
+          <div class="form-group">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="color: whitesmoke;">Order Type: </label> &nbsp;
+            <select id="buyorsell" name="buyorsell">
+              <option value="buy">BUY</option>
+              <option value="sell">SELL</option>
+            </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label style="color: whitesmoke;">Quantity: </label> &nbsp;
+            <input id="quantity" name="quantity" required> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label style="color: whitesmoke;">Limit/ Market Price: </label> &nbsp;
+            <select id="pricetype" name="pricetype" (change)="limit_market_price($event.target.value)">
+              <option value="limit">LIMIT</option>
+              <option value="market">MARKET</option>
+            </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label style="color: whitesmoke;" id="priceLabel">Share Price: </label> &nbsp;
+            <input [(ngModel)]="price" id="price" name="price" id="price" required> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn form-control" type="submit" (click)="display_order_placed()" style="background-color: lightgreen; width: 160px; height: 30px;">Place Order</button> &nbsp;
+            <button class="btn form-control" type="reset" style="background-color: lightblue; width: 160px; height: 30px;">Clear</button>
+          </div>
+        </form>
+        <p style="color: red; text-align: center; font-family: 'Times New Roman', Times, serif;"><b><i><sup>*</sup>You're order might take a few minutes to reflect on the screen.</i></b></p>
+      </td>
+    </tr>
+    
+  </table>
+  
