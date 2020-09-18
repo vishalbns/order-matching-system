@@ -20,15 +20,15 @@
       <td style="width: 100%;"><p style="font-family: copperplate; color:whitesmoke; font-size: 25px; ">&nbsp; Microsoft Corporation Common Stock (MSFT) 
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span style="color: lightblue; font-size: 15px; font-family: sans-serif;">Last Close Price: $205</span></p>
+        <span style="color: lightblue; font-size: 15px; font-family: sans-serif;">Last Close Price: </span><span style="color: lightgreen;font-size: 15px; font-family: sans-serif;">${{lastclose}}</span></p>
        </td>
     </tr>
     <tr style="width: 100%; ;height: 250px; background-color:rgb(68, 82, 97) ;"><br>
       <div>
-      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;"> Open Price: </p>
-      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">Total Volume: </p>
-      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">52 Week High/Low: </p>
-      <p style="color: red; text-align: center; font-family: 'Times New Roman', Times, serif;">Circuit Band: 190&lt;Limitorderprice&lt;210</p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;"> Open Price: <span style="color: lightgreen;"> ${{openprice}}</span> </p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">Total Volume: <span style="color: lightgreen;">{{totalVolume}}</span> </p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">Today's High/Low: <span style="color: lightgreen;">${{highprice}}/${{lowprice}}</span> </p>
+      <p style="color: whitesmoke; text-align: center; font-family: 'Times New Roman', Times, serif;">Circuit Band: <span style="color: lightgreen;"> 10% ($189.55 - $231.68)</span></p>
       <form #openmarketform action="/clearGsheet" method="POST" style="text-align: center;">
         <button class="btn form-control" style="width: 200px; height: 30px; background-color: yellowgreen;" (click)="openmarketform.submit()">Open Market</button>
       </form></div>

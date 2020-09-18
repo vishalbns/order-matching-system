@@ -30,7 +30,7 @@ def input_user_order(input_order, orderList):
         order_number += 1
     else:
         main_trigger(30)
-def main_trigger(no_of_orders, midpoint=200):
+def main_trigger(no_of_orders, midpoint=210.62):
     engine = m_engine.MatchingEngine()
 
     #random order generator

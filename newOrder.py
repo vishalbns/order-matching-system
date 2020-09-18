@@ -5,6 +5,24 @@ Created on Sat Sep 12 22:05:51 2020
 
 @author: vishalbns
 """
+from flask import Flask, render_template, jsonify
+from flask_bootstrap import Bootstrap
+import dummy_stock_market as dsm
+from flask_restful import Api, Resource
+import json
+
+app = Flask(__name__)
+api = Api(app)
+
+lastclose = str(dsm.last_close[0])
+openprice = str(dsm.open_price[0])
+volume = str(dsm.volume[0])
+highprice = str(dsm.highprice[0])
+lowprice = str(dsm.lowprice[0])
+#AllRealTimeData = lastclose + ' ' + openprice+ ' ' + volume+ ' ' + highprice+ ' ' + lowprice
+AllRealTimeData = {"lastclose": lastclose,"openprice":openprice,"volume":volume,"highprice":highprice,"lowprice":lowprice}
+print(AllRealTimeData)
+
 from datetime import datetime
 import saveDataToGSheet
 import main_trigger
@@ -17,6 +35,11 @@ def index():
 number_of_user_orders = 1
 keyList = ["ordertype", "quantity", "pricetype", "price"]
 orderDict = {key: [] for key in keyList}
+
+@app.route('/realtimedata', methods = ['GET', 'POST'])
+def get():
+    if request.method == 'GET':
+        return  jsonify(AllRealTimeData)
 
 @app.route('/clearGsheet', methods = ['GET', 'POST'])
 def clear_google_sheets():
@@ -49,6 +72,9 @@ def newOrder():
         print(number_of_user_orders)
         saveDataToGSheet.Export_Data_To_Sheets(newList, number_of_user_orders)
     return render_template('index.html')
+
+
+
 
 if(__name__) == '__main__':
     app.run(debug=True)

@@ -10,15 +10,28 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./ordermatchingsystem.component.css']
 })
 export class OrdermatchingsystemComponent implements OnInit {
-
-//  subscription: Subscription
-//  constructor(private http: HttpClient) {
-//    this.subscription = this.http.get('/realtimedata').subscribe(
-//      data => {
-//        console.log(data);
-//      }
-//    )
-//   }
+  subscription: Subscription;
+  lastclose: string;
+  openprice: string;
+  totalVolume: string;
+  highprice: string;
+  lowprice: string;
+  realtimedata;
+  constructor(private http: HttpClient) {
+    this.subscription = this.http.get('/realtimedata')
+    .subscribe(
+      data => {
+        console.log(data);
+        this.realtimedata = data;
+        this.lastclose = this.realtimedata.lastclose;
+        this.openprice = this.realtimedata.openprice;
+        this.totalVolume = this.realtimedata.volume;
+        this.highprice = this.realtimedata.highprice;
+        this.lowprice = this.realtimedata.lowprice;
+        console.log(this.lastclose);
+      }
+    )
+   }
   ngOnInit(): void {
   }
   price: string;
@@ -43,7 +56,7 @@ export class OrdermatchingsystemComponent implements OnInit {
     console.log(this.price);
     this.nprice = parseFloat(this.price);
     console.log(this.nprice);
-    if((this.nprice >= 190) && (this.nprice <=210)) {
+    if((this.nprice >= 189.55) && (this.nprice <=231.68)) {
       document.forms["newOrderForm"].submit();
       alert("Your order is placed! The success/failure of your order will be reflected soon!")
       //this.form.submit();
